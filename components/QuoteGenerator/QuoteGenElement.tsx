@@ -2,8 +2,8 @@ import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
 
-const constGradientBackgroundCon = styled.div`
-  background: linear-gradient(to right, #000029, #2a2c8e);
+export const GradientBackgroundCon = styled.div`
+  background: linear-gradient(to right, #7e7ecb, #5e086c);
   background-size: 400% 400%;
   animation: gradient 6s ease infinite;
   height: 100vh;
