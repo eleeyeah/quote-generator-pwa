@@ -7,9 +7,15 @@ import {
   BackgroundImage1,
   BackgroundImage2,
   FooterContainer,
-  FooterLink,
+  CustomLink,
   GradientBackgroundCon,
   RedSpan,
+  QuoteGeneratorContainer,
+  QuoteGeneratorInnerContainer,
+  QuoteGeneratorTitle,
+  QuoteGeneratorSubtitle,
+  QuoteGeneratorButton,
+  QuoteGeneratorButtonText,
 } from "@/components/QuoteGenerator/QuoteGenElements";
 
 //Assets
@@ -30,23 +36,55 @@ export default function Home() {
 
       {/* Background */}
       <GradientBackgroundCon>
+        {/* Quote Generator Modal */}
+        {/* <QuoteGeneratorModal/> */}
+        {/* Quote Generator */}
+        <QuoteGeneratorContainer>
+          <QuoteGeneratorInnerContainer>
+            <QuoteGeneratorTitle>
+              Daily Inspirational Quotes
+            </QuoteGeneratorTitle>
+            <QuoteGeneratorSubtitle>
+              Generate some inspiration for the day ahead!
+              <br />
+              by{" "}
+              <CustomLink
+                href="https://zenquotes.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ZenQuotes API
+              </CustomLink>
+            </QuoteGeneratorSubtitle>
+            <QuoteGeneratorButton>
+              <QuoteGeneratorButtonText onClick={null}>
+                Generate
+              </QuoteGeneratorButtonText>
+            </QuoteGeneratorButton>
+          </QuoteGeneratorInnerContainer>
+        </QuoteGeneratorContainer>
+
+        {/* Background Images */}
         <BackgroundImage1 src={speechBubble} height={300} alt="speech bubble" />
-        <BackgroundImage2 src={quotes} height={300} alt="speech bubble" />
+        {/* fix this image's css */}
+        {/* <BackgroundImage2 src={speechBubble} alt="speech bubble" /> */}
+
+        {/* Footer */}
+        <FooterContainer>
+          <>
+            Quotes Generated:{quoteCounter}
+            <br />
+            Developed with <RedSpan>🎔</RedSpan> by{" "}
+            <CustomLink
+              href="https://portfolio-iliehonciuc.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              @ Ilie Honciuc
+            </CustomLink>
+          </>
+        </FooterContainer>
       </GradientBackgroundCon>
-      <FooterContainer>
-        <>
-          Quotes Generated:{quoteCounter}
-          <br />
-          Developed with <RedSpan>🎔</RedSpan> by{" "}
-          <FooterLink
-            href="https://portfolio-iliehonciuc.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            @ Ilie Honciuc
-          </FooterLink>
-        </>
-      </FooterContainer>
     </>
   );
 }
