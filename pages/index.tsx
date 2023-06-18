@@ -57,9 +57,7 @@ export default function Home() {
               </CustomLink>
             </QuoteGeneratorSubtitle>
             <QuoteGeneratorButton>
-              <QuoteGeneratorButtonText onClick={null}>
-                Generate
-              </QuoteGeneratorButtonText>
+              <QuoteGeneratorButtonText>Generate</QuoteGeneratorButtonText>
             </QuoteGeneratorButton>
           </QuoteGeneratorInnerContainer>
         </QuoteGeneratorContainer>
