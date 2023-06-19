@@ -14,6 +14,15 @@
     "categories": {
       "auth": {
         "quotegeneratorpwabf9dc83a": {}
+      },
+      "function": {
+        "inspQuoteLambda": {
+          "deploymentBucketName": "amplify-quotegeneratorpwa-dev-133252-deployment",
+          "s3Key": "amplify-builds/inspQuoteLambda-66736d69365535496979-build.zip"
+        }
+      },
+      "api": {
+        "quotegeneratorpwa": {}
       }
     }
   }
