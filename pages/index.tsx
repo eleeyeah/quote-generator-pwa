@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { API } from "aws-amplify";
 import { quotesQueryName } from "@/src/graphql/queries";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
@@ -22,6 +22,7 @@ import {
 
 //Assets
 import speechBubble from "@/assets/speechBubble.png";
+import QuoteGeneratorModal from "@/components/QuoteGenerator";
 
 // interface for DynamoDB object
 interface UpdateQuoteInfoData {
@@ -47,8 +48,16 @@ function isGraphQLResultForquotesQueryName(
   );
 }
 
+
+
 export default function Home() {
   const [numberOfQuotes, setNumberOfQuotes] = useState<Number | null>(0);
+  const [openGenerator, setOpenGenerator] = useState<boolean>(false);
+
+  const [processingQuote, setProcessingQuote] = useState<boolean>(false);
+  const [quoteReceived, setQuoteReceived] = useState<String | null>(null);
+
+
 
   // quotes generated (DynamoDB object fetch function)
   const updateQuoteInfo = async () => {
@@ -85,6 +94,17 @@ export default function Home() {
     updateQuoteInfo();
   }, []);
 
+  // Quote Generator Modal function
+  const HandleCloseGenerator = () => {
+    setOpenGenerator(false);  
+  }
+
+  // Open Quote Generator Modal function
+  const handleOpenGenerator = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    setOpenGenerator(true);
+  }
+
   return (
     <>
       <Head>
@@ -96,11 +116,20 @@ export default function Home() {
 
       {/* Background */}
       <GradientBackgroundCon>
+
+
         {/* Quote Generator Modal */}
-        {/* <QuoteGeneratorModal/> */}
+        <QuoteGeneratorModal
+        open={openGenerator}
+        close={HandleCloseGenerator}
+        processingQuote={processingQuote}
+        seProcessingQuote={setProcessingQuote}
+        quoteReceived={quoteReceived}
+        setQuoteReceived={setQuoteReceived}
+        />
+
 
         {/* Quote Generator */}
-
         <QuoteGeneratorContainer>
           <QuoteGeneratorInnerContainer>
             <QuoteGeneratorTitle>
@@ -119,7 +148,9 @@ export default function Home() {
               </CustomLink>
             </QuoteGeneratorSubtitle>
             <QuoteGeneratorButton>
-              <QuoteGeneratorButtonText>Generate</QuoteGeneratorButtonText>
+              <QuoteGeneratorButtonText
+              onClick={handleOpenGenerator}
+              >Generate</QuoteGeneratorButtonText>
             </QuoteGeneratorButton>
           </QuoteGeneratorInnerContainer>
         </QuoteGeneratorContainer>

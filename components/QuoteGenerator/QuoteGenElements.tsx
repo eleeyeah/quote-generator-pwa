@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
 import { execSync } from "child_process";
+import { Box } from "@mui/material";
 
 export const GradientBackgroundCon = styled.div`
   background: linear-gradient(to right, #8ba5e7, #0d65b2);
@@ -34,16 +35,7 @@ export const BackgroundImage1 = styled(Image)`
     margin-top: -0px;
   }
 `;
-export const BackgroundImage2 = styled(Image)`
-  position: relative;
-  z-index: 2;
-  right: -18px;
-  margin-bottom: 10px;
-  height: 40%;
-  width: 20%;
 
-  transform: scaleX(-1) scaleY(-1);
-`;
 export const FooterContainer = styled.div`
   width: 100vw;
   height: 50px;
@@ -165,4 +157,28 @@ export const QuoteGeneratorButtonText = styled.div`
     font-size: 16px;
     padding: 0 10px 0 10px;
   }
+`;
+
+export const QuoteGeneratorModalContainer = styled(Box)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70vw;
+  height: 70vh;
+  box-shadow: 24;
+
+  /* Glassmorphism */
+  background: rgba(255, 223, 126, 0.18);
+  box-shadow: 0 12px 32px 0 rgba(118, 124, 205, 0.3);
+  backdrop-filter: blur(14.5px);
+  -webkit-backdrop-filter: blur(14.5px);
+  border-radius: 10px;
+  border: 0.5px solid rgba(177, 177, 245, 0.59);
+`;
+export const QuoteGeneratorModalInnerContainer = styled.div`
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: relative;
 `;
