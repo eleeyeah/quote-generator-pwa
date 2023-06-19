@@ -15,11 +15,15 @@ type Query {
 # Public Data
 type QuoteAppData
   @model
-  @auth(rules: [{ allow: public, provider: iam, operations: [read] }]) {
+  @auth(rules: [{ allow: public, provider: iam, operations: [read] },]) 
+  {
   id: ID!
   queryName: String!
-    @index(name: "QuotesQueryName", queryField: "quotesQueryName")
+    @index(name: "QuotesQueryName",
+     queryField: "quotesQueryName"
+     )
   quotesGenerated: Int!
   createdAt: String
   updatedAt: String
 }
+
