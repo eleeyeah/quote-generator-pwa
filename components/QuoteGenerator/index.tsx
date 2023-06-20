@@ -93,16 +93,16 @@ const QuoteGeneratorModal = ({
             )}
 
             {/* State #2: Quote state fullfilled*/}
-            {quoteReceived !== null && (
+            {quoteReceived === null && (
               <>
-                {/* <QuoteGeneratorTitle>Download your quote</QuoteGeneratorTitle>
-                <QuoteGeneratorSubtitle style={{ marginTop: "20px" }}>
-                  See a quote you like? Download it!
-                </QuoteGeneratorSubtitle> */}
+                <QuoteGeneratorTitle>Preview your quote</QuoteGeneratorTitle>
                 <ImageBlobContainer>
                   <ImageBlob quoteReceived={quoteReceived} blobUrl={blobUrl} />
                 </ImageBlobContainer>
                 <AnimatedDownloadButton handleDownload={handleDownload} />
+                <QuoteGeneratorSubtitle style={{ marginTop: "2px" }}>
+                  See a quote you like? Download it!
+                </QuoteGeneratorSubtitle>
               </>
             )}
           </QuoteGeneratorModalInnerContainer>

@@ -138,6 +138,7 @@ export const QuoteGeneratorButton = styled.div`
     transform: scale(1.1);
     transform-origin: center;
   }
+
   @media only screen and (max-width: 600px) {
     width: 100px;
     height: 50px;
@@ -184,14 +185,15 @@ export const QuoteGeneratorModalInnerContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  position: relative;
+  position: absolute;
 `;
 
 export const ModalCircularProgress = styled(CircularProgress)`
   color: white !important;
   stroke-linecap: round;
-  position: relative;
+  position: absolute;
   margin-left: -55px;
   left: 50%;
   transform: translateX(-50%);
+  margin-top: 50px;
 `;

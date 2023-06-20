@@ -18,9 +18,7 @@ const AnimatedDownloadButton = ({
   return (
     <DownloadQuoteCardContainer onClick={handleDownload}>
       <CenteredLottie loop animationData={lottieJson} play />
-      <DownloadQuoteCardContainerText>
-        Download Quote
-      </DownloadQuoteCardContainerText>
+      <DownloadQuoteCardContainerText>Download</DownloadQuoteCardContainerText>
     </DownloadQuoteCardContainer>
   );
 };
