@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // MUI Imports
 import { Backdrop, Fade, Modal } from "@mui/material";
@@ -35,6 +35,32 @@ const QuoteGeneratorModal = ({
 }: QuoteGeneratorModalProps) => {
   const wiseDevQuote = "Failure is always an option";
   const wiseDevQuoteAuthor = " - a wise senior developer";
+
+  const [blobUrl, setBlobUrl] = useState<string | null>(null);
+
+  // Handle the card download functionality
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    if (typeof blobUrl === "string") {
+      link.download = "quote.png";
+      link.click();
+    }
+  };
+
+  // Handle the receiving of the card functionality
+  useEffect(() => {
+    if (quoteReceived) {
+      const binaryData = Buffer.from(quoteReceived, "base64"); // Convert the base64 string to a buffer
+      const blob = new Blob([binaryData], { type: "image/png" }); // Create Blob from buffer
+      const blobUrlGenerated = URL.createObjectURL(blob); // Create an object URL from blob
+      console.log(blobUrlGenerated);
+      setBlobUrl(blobUrlGenerated);
+
+      return () => {
+        URL.revokeObjectURL(blobUrlGenerated); // Free the memory
+      };
+    }
+  }, [quoteReceived]);
 
   return (
     <Modal
@@ -74,9 +100,9 @@ const QuoteGeneratorModal = ({
                   See a quote you like? Download it!
                 </QuoteGeneratorSubtitle> */}
                 <ImageBlobContainer>
-                  <ImageBlob />
+                  <ImageBlob quoteReceived={quoteReceived} blobUrl={blobUrl} />
                 </ImageBlobContainer>
-                <AnimatedDownloadButton />
+                <AnimatedDownloadButton handleDownload={handleDownload} />
               </>
             )}
           </QuoteGeneratorModalInnerContainer>
