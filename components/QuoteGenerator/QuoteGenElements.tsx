@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
 import { execSync } from "child_process";
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 
 export const GradientBackgroundCon = styled.div`
   background: linear-gradient(to right, #8ba5e7, #0d65b2);
@@ -168,8 +168,12 @@ export const QuoteGeneratorModalContainer = styled(Box)`
   height: 70vh;
   box-shadow: 24;
 
+  &:focus {
+    outline: none !important ;
+  }
+
   /* Glassmorphism */
-  background: rgba(255, 223, 126, 0.18);
+  background: rgba(146, 164, 75, 0.696);
   box-shadow: 0 12px 32px 0 rgba(118, 124, 205, 0.3);
   backdrop-filter: blur(14.5px);
   -webkit-backdrop-filter: blur(14.5px);
@@ -181,4 +185,13 @@ export const QuoteGeneratorModalInnerContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   position: relative;
+`;
+
+export const ModalCircularProgress = styled(CircularProgress)`
+  color: white !important;
+  stroke-linecap: round;
+  position: relative;
+  margin-left: -55px;
+  left: 50%;
+  transform: translateX(-50%);
 `;

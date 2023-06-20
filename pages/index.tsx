@@ -48,16 +48,12 @@ function isGraphQLResultForquotesQueryName(
   );
 }
 
-
-
 export default function Home() {
   const [numberOfQuotes, setNumberOfQuotes] = useState<Number | null>(0);
   const [openGenerator, setOpenGenerator] = useState<boolean>(false);
 
   const [processingQuote, setProcessingQuote] = useState<boolean>(false);
   const [quoteReceived, setQuoteReceived] = useState<String | null>(null);
-
-
 
   // quotes generated (DynamoDB object fetch function)
   const updateQuoteInfo = async () => {
@@ -96,14 +92,28 @@ export default function Home() {
 
   // Quote Generator Modal function
   const HandleCloseGenerator = () => {
-    setOpenGenerator(false);  
-  }
+    setOpenGenerator(false);
+  };
 
   // Open Quote Generator Modal function
   const handleOpenGenerator = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setOpenGenerator(true);
-  }
+    setProcessingQuote(true);
+
+    try {
+      // Run Lambda function
+      setTimeout(() => {
+        setProcessingQuote(false);
+      }, 3000);
+
+      // terminate processing
+      // setProcessingQuote(false);
+    } catch (error) {
+      console.log("error generating quote", error);
+      setProcessingQuote(false);
+    }
+  };
 
   return (
     <>
@@ -116,18 +126,15 @@ export default function Home() {
 
       {/* Background */}
       <GradientBackgroundCon>
-
-
         {/* Quote Generator Modal */}
         <QuoteGeneratorModal
-        open={openGenerator}
-        close={HandleCloseGenerator}
-        processingQuote={processingQuote}
-        seProcessingQuote={setProcessingQuote}
-        quoteReceived={quoteReceived}
-        setQuoteReceived={setQuoteReceived}
+          open={openGenerator}
+          close={HandleCloseGenerator}
+          processingQuote={processingQuote}
+          seProcessingQuote={setProcessingQuote}
+          quoteReceived={quoteReceived}
+          setQuoteReceived={setQuoteReceived}
         />
-
 
         {/* Quote Generator */}
         <QuoteGeneratorContainer>
@@ -147,10 +154,8 @@ export default function Home() {
                 ZenQuotes API
               </CustomLink>
             </QuoteGeneratorSubtitle>
-            <QuoteGeneratorButton>
-              <QuoteGeneratorButtonText
-              onClick={handleOpenGenerator}
-              >Generate</QuoteGeneratorButtonText>
+            <QuoteGeneratorButton onClick={handleOpenGenerator}>
+              <QuoteGeneratorButtonText>Generate</QuoteGeneratorButtonText>
             </QuoteGeneratorButton>
           </QuoteGeneratorInnerContainer>
         </QuoteGeneratorContainer>
