@@ -43,6 +43,15 @@
   "function": {
     "inspQuoteLambda": {
       "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "quotegeneratorpwa"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
