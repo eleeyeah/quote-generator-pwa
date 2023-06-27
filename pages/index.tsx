@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { API } from "aws-amplify";
-import { quotesQueryName } from "@/src/graphql/queries";
+import { generateAQuote, quotesQueryName } from "@/src/graphql/queries";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 
 //Components
@@ -23,6 +23,18 @@ import {
 //Assets
 import speechBubble from "@/assets/speechBubble.png";
 import QuoteGeneratorModal from "@/components/QuoteGenerator";
+
+// interface for appsync Lambda JSON response
+
+interface GenerateAQuoteData {
+  generateAQuote: {
+    statusCode: number;
+    headers: {
+      [key: string]: string;
+    };
+    body: string;
+  };
+}
 
 // interface for DynamoDB object
 interface UpdateQuoteInfoData {
@@ -93,6 +105,8 @@ export default function Home() {
   // Quote Generator Modal function
   const HandleCloseGenerator = () => {
     setOpenGenerator(false);
+    setProcessingQuote(false);
+    setQuoteReceived(null);
   };
 
   // Open Quote Generator Modal function
@@ -103,9 +117,35 @@ export default function Home() {
 
     try {
       // Run Lambda function
-      setTimeout(() => {
-        setProcessingQuote(false);
-      }, 3000);
+      const runFunction = "runFunction";
+      const runFunctionStringified = JSON.stringify(runFunction);
+      const response = await API.graphql<GenerateAQuoteData>({
+        query: generateAQuote,
+        authMode: "AWS_IAM",
+        variables: {
+          input: runFunctionStringified,
+        },
+      });
+
+      // String manipulation to extract the element that we have in the quote, from the response
+      const responseStringified = JSON.stringify(response);
+      const responseReStringified = JSON.stringify(responseStringified);
+      const bodyIndex = responseReStringified.indexOf("body=") + 5;
+      const bodyAndBase64 = responseReStringified.substring(bodyIndex);
+      const bodyArray = bodyAndBase64.split(",");
+      const body = bodyArray[0];
+      console.log(body);
+      setQuoteReceived(body);
+
+      //End state of processing
+      setProcessingQuote(false);
+
+      //Fetch if any new quotes were generated
+      updateQuoteInfo();
+
+      // setTimeout(() => {
+      //   setProcessingQuote(false);
+      // }, 3000);
 
       // terminate processing
       // setProcessingQuote(false);

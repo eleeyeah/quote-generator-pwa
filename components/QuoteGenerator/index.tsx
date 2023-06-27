@@ -42,6 +42,7 @@ const QuoteGeneratorModal = ({
   const handleDownload = () => {
     const link = document.createElement("a");
     if (typeof blobUrl === "string") {
+      link.href = blobUrl;
       link.download = "quote.png";
       link.click();
     }
@@ -93,7 +94,7 @@ const QuoteGeneratorModal = ({
             )}
 
             {/* State #2: Quote state fullfilled*/}
-            {quoteReceived === null && (
+            {quoteReceived !== null && (
               <>
                 <QuoteGeneratorTitle>Preview your quote</QuoteGeneratorTitle>
                 <ImageBlobContainer>

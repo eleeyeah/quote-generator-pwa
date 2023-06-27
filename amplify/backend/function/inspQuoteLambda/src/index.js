@@ -12,7 +12,7 @@ Amplify Params - DO NOT EDIT */
 
 // AWS packages
 const AWS = require('aws-sdk');
-const docClient = new AWS.DynamoDB.DocumentClient(); // build a new instance of the DynamoDB Document Client to interact with our DynamoDB table
+const docClient = new AWS.DynamoDB.DocumentClient(); // builds a new instance of the DynamoDB Document Client to interact with our DynamoDB table
 
 
 
@@ -22,37 +22,35 @@ const fetch = require('node-fetch');
 const path = require('path');
 const fs = require('fs');
 
-// Function to UPDATE the DynamoDB table 
+// Function: update DynamoDB table
 async function updateQuoteDDBObject() {
     const quoteTableName = process.env.API_QUOTEGENERATORPWA_QUOTEAPPDATATABLE_NAME;
     const quoteObjectID = "12232-234234-234234234-234234234";
 
     try {
-        const quoteParams = {
+        var quoteParams = {
             TableName: quoteTableName,
             Key: {
-                id: quoteObjectID
+                "id": quoteObjectID,
             },
-            UpdateExpression: "Set # quotesGenerated = #quotesGenerated + :inc",
+            UpdateExpression: "SET #quotesGenerated = #quotesGenerated + :inc",
             ExpressionAttributeValues: {
-                ":inc": 1
+                ":inc": 1,
             },
             ExpressionAttributeNames: {
-                "#quotesGenerated": "quotesGenerated"
+                "#quotesGenerated": "quotesGenerated",
             },
             ReturnValues: "UPDATED_NEW"
         };
 
-        const updatedQuoteObject = await docClient.update(quoteParams).promise();
-        return updatedQuoteObject;
-
-
+        const updateQuoteObject = await docClient.update(quoteParams).promise();
+        return updateQuoteObject;
     } catch (error) {
-        console.log('error updatind DynamoDB table', error)
+        console.log('error updating quote object in DynamoDB', error)
     }
 }
 
-// Function to generate the image
+
 
 
 
@@ -69,6 +67,8 @@ exports.handler = async (event) => {
     // 5. turn these elements into an svg
     // 6. SVG --> image as png (/ base 64 in lambda)
 
+
+    // Function to generate the image
     async function getRandomQuote(apiURLInput) {
         // The quote is...
         let quoteText;
