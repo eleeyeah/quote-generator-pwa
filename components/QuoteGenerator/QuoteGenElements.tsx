@@ -195,5 +195,5 @@ export const ModalCircularProgress = styled(CircularProgress)`
   margin-left: -55px;
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 50px;
+  margin-top: 150px;
 `;
