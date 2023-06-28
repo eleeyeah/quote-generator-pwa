@@ -4,7 +4,7 @@ import Image from "next/image";
 import Lottie from "react-lottie-player";
 
 export const ImageBlobContainer = styled.div`
-  top: 130px;
+  top: 50px;
   position: relative;
   text-align: center;
   transition: 0.3s all ease-in-out;
@@ -14,18 +14,20 @@ export const ImageBlobContainer = styled.div`
   z-index: 99999;
 
   &:hover {
+    top: 112px;
     transform: scale(4.8);
     z-index: 99999;
     transition: 0.3s ease-in-out;
     box-shadow: 0 0 30px 40px rgba(0, 0, 0, 0.6);
     height: 100px;
     @media only screen and (max-width: 800px) {
-      transform: scale(3.3);
+      transform: scale(1.1);
       z-index: 99999;
       transition: 0.3s all ease-in-out;
       box-shadow: 0 0 80px 90px rgba(0, 0, 0, 0.6);
     }
     @media only screen and (max-width: 600px) {
+      top: 30px;
       transform: scale(2.2);
       z-index: 99999;
       transition: 0.3s all ease-in-out;
@@ -39,10 +41,10 @@ export const DownloadQuoteCardContainer = styled.div`
   width: 300px;
   height: 300px;
   position: relative;
-  border-radius: 50%;
+  border-radius: 15%;
   cursor: pointer;
   transform: scale(0.4);
-  top: 5rem;
+  top: 3rem;
 
   margin: auto;
   &:hover {
@@ -54,7 +56,8 @@ export const DownloadQuoteCardContainer = styled.div`
   }
   @media only screen and (max-width: 600px) {
     width: 150px;
-  height: 150px;
+    height: 150px;
+    
   }
 `;
 
@@ -69,7 +72,8 @@ export const CenteredLottie = styled(Lottie)`
 `;
 
 export const DownloadQuoteCardContainerText = styled.div`
-  color: #cc9191;
+  color: #f57c7c;
+  top: 9%;
   font-family: "Permanent Marker", sans-serif;
   font-size: 38px;
   position: relative;

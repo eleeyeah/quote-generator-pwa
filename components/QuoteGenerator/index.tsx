@@ -85,7 +85,7 @@ const QuoteGeneratorModal = ({
               <>
                 <ModalCircularProgress size={"5rem"} thickness={5} />
                 <QuoteGeneratorTitle>Generating Quote...</QuoteGeneratorTitle>
-                <QuoteGeneratorSubtitle style={{ marginTop: "20px" }}>
+                <QuoteGeneratorSubtitle style={{ marginTop: "260px" }}>
                   {wiseDevQuote}
                   <br />
                   <span style={{ fontSize: "26" }}> {wiseDevQuoteAuthor} </span>
@@ -101,7 +101,7 @@ const QuoteGeneratorModal = ({
                   <ImageBlob quoteReceived={quoteReceived} blobUrl={blobUrl} />
                 </ImageBlobContainer>
                 <AnimatedDownloadButton handleDownload={handleDownload} />
-                <QuoteGeneratorSubtitle style={{ marginTop: "2px" }}>
+                <QuoteGeneratorSubtitle style={{ marginTop: "-30px" }}>
                   See a quote you like? Download it!
                 </QuoteGeneratorSubtitle>
               </>
